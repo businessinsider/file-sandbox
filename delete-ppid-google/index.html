@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google PPID Deletion</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<style type="text/css">
+.required { color: #f14668; }
+</style>
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      Google PPID Deletion Tool
+    </h1>
+    <p class="block">
+      This form is part of the DSAR process by which individuals request that their data is deleted. You will need a Permutive ID associated to a user in order to proceed.
+    </p>
+    <!-- <div class="box"> -->
+    <form method="GET" action="/" class="box">
+      <input type="hidden" id="formSubmitted" value="true" />
+      <div class="field">
+        <div class="label">
+          <label class="label">PPID <sup class="required">*</sup></label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" id="ppid" class="ppid" placeholder="xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"
+              value="">
+              <!-- 6bdd185d-74d5-434b-9b37-c200d06ba9d1 -->
+            </div>
+            <p class="help is-danger">
+              The user's Permutive ID. This field is required.
+            </p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="field">
+        <div class="control">
+          <button class="button is-link" type="submit" id="confirmDeleteButton">Submit</button>
+        </div>        
+      </div>
+
+      <div class="modal" id="confirmModal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="notification">
+            <div class="field">
+              <div class="control">
+                <p>Are you sure you want to send Google a deletion request for PPID <code id="ppidConfirmation"></code>? Once you click <strong>Yes</strong>, there's no going back!</p>
+              </div>
+            </div>
+            <nav class="modal-foot field is-grouped">
+              <div class="control">
+                <a class="button is-link" id="deleteButton">Yes</a>
+              </div>
+              <div class="control">
+                <button class="button" data-action="close-modal">No</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <button class="modal-close is-large" data-action="close-modal" aria-label="close"></button>
+      </div>
+
+    </form>
+    <!-- </div> -->
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $ppidField = document.getElementById('ppid');
+  const $confirmButton = document.getElementById('confirmDeleteButton');
+  const $deleteButton = document.getElementById('deleteButton');
+  const $confirmModal = document.getElementById('confirmModal');
+  const $closeModalEls = document.querySelectorAll('.modal-background, [data-action="close-modal"]');
+  const $ppidConfirmation = document.getElementById('ppidConfirmation');
+  const urlParams = new URLSearchParams(window.location.search);
+  const gamNetworkCode = '4442842';
+
+  // function to populate the confirmation modal
+  function populateConfirmModal() {
+    const ppid = $ppidField.value;
+    // populate the confirmation modal with the PPID value
+    $ppidConfirmation.innerText = ppid;
+    // populate the delete link
+    // todo: remove 'foo' for final version
+    $deleteButton.href = `https://foo.securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
+  }
+
+  // Functions to open and close confirmation modal
+  function openModal() {
+    populateConfirmModal();
+    $confirmModal.classList.add('is-active');
+  }
+
+  function closeModal() {
+    $confirmModal.classList.remove('is-active');
+  }
+
+  // populate ppid field from URL
+  if (urlParams.has('ppid')) {
+    $ppidField.value = urlParams.get('ppid');
+  }
+
+  // if formSubmitted=true is in the URL, pop up the modal
+  if (urlParams.has('formSubmitted') && urlParams.get('formSubmitted') == 'true') {
+    openModal();
+  }
+
+  // populate confirmation modal every time the ppid field changes
+  $ppidField.addEventListener('change', () => populateConfirmModal);
+
+  // Add a click event on buttons to open a specific modal
+  $confirmButton.addEventListener('click', $el => {
+    $el.preventDefault();
+    // fail if ppid isn't filled out
+    if (!$ppidField.value.trim().length) {
+      alert('You must provide a PPID value.');
+      return;
+    }
+    openModal();
+  });
+
+  // Add a click event on modal backgrounds and close links
+  ($closeModalEls || []).forEach(($close) => {
+    $close.addEventListener('click', $el => {
+      $el.preventDefault();
+      closeModal();
+    });
+  });
+
+  // Add a keyboard event to close modal
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+    if (e.keyCode === 27) { // Escape key
+      closeModal();
+    }
+  });
+});
+</script>
+</body>
+</html>
