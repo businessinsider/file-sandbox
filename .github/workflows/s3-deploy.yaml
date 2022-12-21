@@ -6,18 +6,13 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  s3-sync:
+    name: Sync files to S3 Bucket
+    needs: build
+    # Run on self-hosted linux runner
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1 
-
-      - name: Upload files to S3 with AWS CLI
-        run: |
-          aws s3 sync ./ s3://${{ secrets.S3_BUCKET }} --delete
+      
+      - name: Sync files to S3 Bucket 
+        run: aws s3 sync . s3://engagement-file-sandbox/ --no-progress --acl bucket-owner-full-control --follow-symlinks --delete
