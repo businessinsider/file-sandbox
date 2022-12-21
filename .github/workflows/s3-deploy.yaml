@@ -1,9 +1,9 @@
 name: s3-deploy
 
-on: 
-  push:
-    branches:    
-      - main
+on: workflow_dispatch
+  # push:
+  #   branches:    
+  #     - main
 
 jobs:
   s3-sync:
