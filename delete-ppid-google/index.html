@@ -6,7 +6,13 @@
 <title>Google PPID Deletion</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <style type="text/css">
-.required { color: #f14668; }
+:root { 
+  --main-color: #4a4a4a;
+  --danger-color: #f14668; 
+}
+.required { color: var(--danger-color); }
+input:invalid { border: 2px dashed var(--danger-color); }
+input:valid { border: 1px solid var(--main-color); }
 </style>
 </head>
 <body>
@@ -20,6 +26,12 @@
     </p>
     <form method="GET" action="/" class="box">
       <input type="hidden" id="formSubmitted" value="true" />
+      <article id="formErrors" class="message is-danger is-hidden">
+        <div class="message-header">
+          <p>Errors in Form Data</p>
+        </div>
+        <div class="message-body"></div>
+      </article>
       <div class="field">
         <div class="label">
           <label class="label">PPID <sup class="required">*</sup></label>
@@ -28,7 +40,7 @@
           <div class="field">
             <div class="control">
               <input class="input" type="text" id="ppid" class="ppid" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-              pattern="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}" required>
+              pattern="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" required>
             </div>
             <p class="help is-danger">
               The user's Permutive ID. This field is required.
@@ -72,6 +84,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const $ppidField = document.getElementById('ppid');
+  const $errorMessage = document.getElementById('formErrors');
+  const $errorMessageBody = $errorMessage.querySelector('.message-body');
   const $confirmButton = document.getElementById('confirmDeleteButton');
   const $deleteButton = document.getElementById('deleteButton');
   const $confirmModal = document.getElementById('confirmModal');
@@ -79,6 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ppidConfirmation = document.getElementById('ppidConfirmation');
   const urlParams = new URLSearchParams(window.location.search);
   const gamNetworkCode = '4442842';
+  
+  const ppidPlaceholder = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+  const ppidPattern = new RegExp(/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}/);
 
   // function to populate the confirmation modal
   function populateConfirmModal() {
@@ -88,6 +105,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // populate the delete link
     // todo: remove 'foo' for final version
     $deleteButton.href = `https://foo.securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
+  }
+
+  function validateForm() {
+    const errors = [];
+    const ppidValue = $ppidField.value.trim();
+    // fail if ppid isn't filled out
+    if (!ppidValue.length) {
+      errors.push({ 
+        field: $ppidField.id, 
+        msg: 'You must provide a PPID value.'
+      });
+      return errors;
+    }
+    // fail if ppid doesn't pass validation
+    if (!ppidPattern.test(ppidValue)) {
+      errors.push({ 
+        field: $ppidField.id, 
+        msg: `The provided PPID value does not match the PPID pattern (${ppidPlaceholder}): '${ppidValue}'`
+      });
+    }
+    return errors;
+  }
+
+  // display errors above fields
+  function displayErrors(errors = []) {
+    if (!errors.length) {
+      $errorMessage.classList.add('is-hidden');
+      return;
+    }
+    $errorMessage.classList.remove('is-hidden');
+    $errorMessageBody.innerHTML = errors.map(err => `<p><strong>${err.field}</strong>: ${err.msg}</p>`).join();
+    return;
   }
 
   // Functions to open and close confirmation modal
@@ -103,10 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // populate ppid field from URL
   if (urlParams.has('ppid')) {
     $ppidField.value = urlParams.get('ppid');
+    const errors = validateForm();
+    if (errors.length) {
+      displayErrors(errors);
+      return;
+    }
   }
 
   // if formSubmitted=true is in the URL, pop up the modal
-  if (urlParams.has('formSubmitted') && urlParams.get('formSubmitted') === 'true') {
+  if (urlParams.has('formSubmitted') && urlParams.get('formSubmitted') == 'true') {
     openModal();
   }
 
@@ -116,9 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add a click event on buttons to open a specific modal
   $confirmButton.addEventListener('click', event => {
     event.preventDefault();
-    // fail if ppid isn't filled out
-    if (!$ppidField.value.trim().length) {
-      alert('You must provide a PPID value.');
+    const errors = validateForm();
+    if (errors.length) {
+      displayErrors(errors);
       return;
     }
     openModal();
