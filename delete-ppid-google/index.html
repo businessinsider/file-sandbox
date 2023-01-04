@@ -111,11 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // populate confirmation modal every time the ppid field changes
-  $ppidField.addEventListener('change', () => populateConfirmModal);
+  $ppidField.addEventListener('change', populateConfirmModal);
 
   // Add a click event on buttons to open a specific modal
-  $confirmButton.addEventListener('click', $el => {
-    $el.preventDefault();
+  $confirmButton.addEventListener('click', event => {
+    event.preventDefault();
     // fail if ppid isn't filled out
     if (!$ppidField.value.trim().length) {
       alert('You must provide a PPID value.');
