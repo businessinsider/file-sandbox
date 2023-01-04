@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add a click event on modal backgrounds and close links
   ($closeModalEls || []).forEach(($close) => {
-    $close.addEventListener('click', $el => {
-      $el.preventDefault();
+    $close.addEventListener('click', event => {
+      event.preventDefault();
       closeModal();
     });
   });
