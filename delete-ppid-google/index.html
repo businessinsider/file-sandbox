@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // if formSubmitted=true is in the URL, pop up the modal
-  if (urlParams.has('formSubmitted') && urlParams.get('formSubmitted') == 'true') {
+  if (urlParams.has('formSubmitted') && urlParams.get('formSubmitted') === 'true') {
     openModal();
   }
 
