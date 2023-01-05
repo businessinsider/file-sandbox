@@ -83,14 +83,14 @@ input:valid { border: 1px solid var(--main-color); }
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const $ppidField = document.getElementById('ppid');
-  const $errorMessage = document.getElementById('formErrors');
-  const $errorMessageBody = $errorMessage.querySelector('.message-body');
-  const $confirmButton = document.getElementById('confirmDeleteButton');
-  const $deleteButton = document.getElementById('deleteButton');
-  const $confirmModal = document.getElementById('confirmModal');
-  const $closeModalEls = document.querySelectorAll('.modal-background, [data-action="close-modal"]');
-  const $ppidConfirmation = document.getElementById('ppidConfirmation');
+  const ppidField = document.getElementById('ppid');
+  const errorMessage = document.getElementById('formErrors');
+  const errorMessageBody = errorMessage.querySelector('.message-body');
+  const confirmButton = document.getElementById('confirmDeleteButton');
+  const deleteButton = document.getElementById('deleteButton');
+  const confirmModal = document.getElementById('confirmModal');
+  const closeModalEls = document.querySelectorAll('.modal-background, [data-action="close-modal"]');
+  const ppidConfirmation = document.getElementById('ppidConfirmation');
   const urlParams = new URLSearchParams(window.location.search);
   const gamNetworkCode = '4442842';
   
@@ -99,21 +99,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // function to populate the confirmation modal
   function populateConfirmModal() {
-    const ppid = $ppidField.value;
+    const ppid = ppidField.value;
     // populate the confirmation modal with the PPID value
-    $ppidConfirmation.innerText = ppid;
+    ppidConfirmation.innerText = ppid;
     // populate the delete link
     // todo: remove 'foo' for final version
-    $deleteButton.href = `https://foo.securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
+    deleteButton.href = `https://foo.securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
   }
 
   function validateForm() {
     const errors = [];
-    const ppidValue = $ppidField.value.trim();
+    const ppidValue = ppidField.value.trim();
     // fail if ppid isn't filled out
     if (!ppidValue.length) {
       errors.push({ 
-        field: $ppidField.id, 
+        field: ppidField.id, 
         msg: 'You must provide a PPID value.'
       });
       return errors;
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // fail if ppid doesn't pass validation
     if (!ppidPattern.test(ppidValue)) {
       errors.push({ 
-        field: $ppidField.id, 
+        field: ppidField.id, 
         msg: `The provided PPID value does not match the PPID pattern (${ppidPlaceholder}): '${ppidValue}'`
       });
     }
@@ -131,27 +131,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // display errors above fields
   function displayErrors(errors = []) {
     if (!errors.length) {
-      $errorMessage.classList.add('is-hidden');
+      errorMessage.classList.add('is-hidden');
       return;
     }
-    $errorMessage.classList.remove('is-hidden');
-    $errorMessageBody.innerHTML = errors.map(err => `<p><strong>${err.field}</strong>: ${err.msg}</p>`).join();
+    errorMessage.classList.remove('is-hidden');
+    errorMessageBody.innerHTML = errors.map(err => `<p><strong>${err.field}</strong>: ${err.msg}</p>`).join();
     return;
   }
 
   // Functions to open and close confirmation modal
   function openModal() {
     populateConfirmModal();
-    $confirmModal.classList.add('is-active');
+    confirmModal.classList.add('is-active');
   }
 
   function closeModal() {
-    $confirmModal.classList.remove('is-active');
+    confirmModal.classList.remove('is-active');
   }
 
   // populate ppid field from URL
   if (urlParams.has('ppid')) {
-    $ppidField.value = urlParams.get('ppid');
+    ppidField.value = urlParams.get('ppid');
     const errors = validateForm();
     if (errors.length) {
       displayErrors(errors);
@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // populate confirmation modal every time the ppid field changes
-  $ppidField.addEventListener('change', populateConfirmModal);
+  ppidField.addEventListener('change', populateConfirmModal);
 
   // Add a click event on buttons to open a specific modal
-  $confirmButton.addEventListener('click', event => {
+  confirmButton.addEventListener('click', event => {
     event.preventDefault();
     const errors = validateForm();
     if (errors.length) {
@@ -179,8 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Add a click event on modal backgrounds and close links
-  ($closeModalEls || []).forEach(($close) => {
-    $close.addEventListener('click', event => {
+  (closeModalEls || []).forEach((close) => {
+    close.addEventListener('click', event => {
       event.preventDefault();
       closeModal();
     });
