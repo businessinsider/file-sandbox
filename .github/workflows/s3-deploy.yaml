@@ -6,13 +6,12 @@ on: workflow_dispatch
   #     - main
 
 jobs:
-  s3-sync:
+  deploy:
     name: Sync files to S3 Bucket
-    needs: build
     # Run on self-hosted linux runner
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       
       - name: Sync files to S3 Bucket 
-        run: aws s3 sync . s3://experience-file-sandbox/ --no-progress --acl bucket-owner-full-control --follow-symlinks --delete
+        run: aws s3 sync . s3://experience-file-sandbox/ --no-progress --follow-symlinks --delete
