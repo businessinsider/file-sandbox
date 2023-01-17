@@ -1,9 +1,10 @@
 name: s3-deploy
 
-on: workflow_dispatch
-  # push:
-  #   branches:    
-  #     - main
+on: 
+  push:
+    branches:    
+      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,10 +17,12 @@ jobs:
       - name: Sync files to S3 Bucket 
         run: |
           aws s3 sync . s3://experience-file-sandbox/ \
-            --exclude '.git' \
+            --exclude '.DS_Store' \
             --exclude '.gitignore' \
+            --exclude '.git*' \
             --exclude 'package.json' \
-            --exclude '.github' \
+            --exclude 'package.lock' \
             --exclude '*.md' \
-            --follow-symlinks \
-            --delete 
+            --exclude '*.sh' \
+            --delete  \
+            --dryrun
