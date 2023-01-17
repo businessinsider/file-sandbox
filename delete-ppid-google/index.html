@@ -103,8 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // populate the confirmation modal with the PPID value
     ppidConfirmation.innerText = ppid;
     // populate the delete link
-    // todo: remove 'foo' for final version
-    deleteButton.href = `https://foo.securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
+    deleteButton.href = `https://securepubads.g.doubleclick.net/user_data_deletion?ppid=${ppid}&iu=${gamNetworkCode}`;
   }
 
   function validateForm() {
