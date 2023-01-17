@@ -14,15 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Sync files to S3 Bucket 
+      # - name: Sync files to S3 Bucket 
+      #   run: |
+      #     aws s3 sync . s3://experience-file-sandbox/ \
+      #       --exclude '.DS_Store' \
+      #       --exclude '.gitignore' \
+      #       --exclude '.git*' \
+      #       --exclude 'package.json' \
+      #       --exclude 'package.lock' \
+      #       --exclude '*.md' \
+      #       --exclude '*.sh' \
+      #       --delete  \
+      #       --dryrun
+      
+      - name: Delete files from S3 bucket
         run: |
-          aws s3 sync . s3://experience-file-sandbox/ \
-            --exclude '.DS_Store' \
-            --exclude '.gitignore' \
-            --exclude '.git*' \
-            --exclude 'package.json' \
-            --exclude 'package.lock' \
-            --exclude '*.md' \
-            --exclude '*.sh' \
-            --delete  \
-            --dryrun
+          aws s3 rm s3://experience-file-sandbox --recursive --exclude "*.html" --dryrun
