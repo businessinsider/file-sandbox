@@ -15,10 +15,10 @@ jobs:
       
       - name: Sync files to S3 Bucket 
         run: aws s3 sync . s3://experience-file-sandbox/ \
-          --exclude '.git'
-          --exclude '.gitignore'
-          --exclude 'package.json'
-          --exclude '.github'
-          --exclude '*.md'
+          --exclude '.git' \
+          --exclude '.gitignore' \
+          --exclude 'package.json' \
+          --exclude '.github' \
+          --exclude '*.md' \
           --follow-symlinks \
           --delete 
