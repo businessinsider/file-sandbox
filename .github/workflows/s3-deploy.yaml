@@ -29,4 +29,4 @@ jobs:
       
       - name: Delete files from S3 bucket
         run: |
-          aws s3 rm s3://experience-file-sandbox --recursive --exclude "*.html" --dryrun
+          aws s3 rm s3://experience-file-sandbox --recursive --exclude "*.html"
