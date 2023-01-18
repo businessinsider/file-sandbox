@@ -15,13 +15,4 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Sync files to S3 Bucket 
-        run: |
-          aws s3 sync . s3://experience-file-sandbox/ \
-            --exclude '.DS_Store' \
-            --exclude '*.git*' \
-            --exclude '*package.json' \
-            --exclude '*.lock' \
-            --exclude '*.md' \
-            --exclude '*.sh' \
-            --delete \
-            --dryrun
+        run: sh -x deploy.sh
