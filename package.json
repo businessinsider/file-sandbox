@@ -1,0 +1,23 @@
+{
+  "name": "file-sandbox",
+  "version": "1.0.0",
+  "description": "A place for random files to live",
+  "main": "dist/index.html",
+  "scripts": {
+    "dev": "cd dist && http-server -p 9998",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/businessinsider/file-sandbox.git"
+  },
+  "author": "Christa Dickson <cdickson@insider.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/businessinsider/file-sandbox/issues"
+  },
+  "homepage": "https://github.com/businessinsider/file-sandbox#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

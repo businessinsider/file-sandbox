@@ -1,0 +1,15 @@
+{
+  "name": "delete-ppid-google",
+  "version": "1.0.0",
+  "description": "A tool for deleting PPIDs from Google Ad Manager",
+  "main": "index.html",
+  "scripts": {
+    "build": "mkdir -p ../../dist/delete-ppid-google/css/ && cp ./node_modules/bulma/css/bulma.min.css ../../dist/delete-ppid-google/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christa Dickson <cdickson@insider.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "bulma": "^0.9.4"
+  }
+}
