@@ -18,10 +18,9 @@ jobs:
         run: |
           aws s3 sync . s3://experience-file-sandbox/ \
             --exclude '.DS_Store' \
-            --exclude '**/*/.gitignore' \
             --exclude '.git*' \
-            --exclude '**/*/package.json' \
-            --exclude '**/*/package.lock' \
+            --exclude 'package.json' \
+            --exclude 'package.lock' \
             --exclude '*.md' \
             --exclude '*.sh' \
             --delete \
