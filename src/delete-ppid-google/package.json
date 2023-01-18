@@ -4,8 +4,9 @@
   "description": "A tool for deleting PPIDs from Google Ad Manager",
   "main": "index.html",
   "scripts": {
-    "build": "mkdir -p ../../dist/delete-ppid-google/css/ && cp ./node_modules/bulma/css/bulma.min.css ../../dist/delete-ppid-google/css/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy": "mkdir -p ../../dist/delete-ppid-google/ && cp index.html ../../dist/delete-ppid-google/",
+    "copy:css": "mkdir -p ../../dist/delete-ppid-google/css/ && cp ./node_modules/bulma/css/bulma.min.css ../../dist/delete-ppid-google/css/",
+    "build": "npm run copy && npm run copy:css"
   },
   "author": "Christa Dickson <cdickson@insider.com>",
   "license": "ISC",

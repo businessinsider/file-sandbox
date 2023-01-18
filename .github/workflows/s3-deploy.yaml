@@ -22,7 +22,7 @@ jobs:
         if: ${{ inputs.dryrun_mode }}
         run: sh -x deploy-dryrun.sh
 
-      - name: Sync files to S3 Bucket
+      - name: S3 sync (for real)
         if: ${{ !inputs.dryrun_mode }} 
         run: sh -x deploy.sh
 
