@@ -1,0 +1,1 @@
+This is where the generated file will go. Run `npm run files` to generate the file.
