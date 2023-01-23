@@ -1,0 +1,12 @@
+{
+  "name": "fenrir-code-audits",
+  "version": "1.0.0",
+  "description": "Automating a list of Fenrir files to be audited",
+  "main": "index.js",
+  "scripts": {
+    "files": "sh get_file_paths.sh > data/fenrir_file_paths.txt",
+    "start": "npm run files"
+  },
+  "author": "Christa Dickson <cdickson@insider.com>",
+  "license": "ISC"
+}

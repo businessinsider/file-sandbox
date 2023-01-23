@@ -1,1 +1,1 @@
-Your compiled files should live here.
+Your compiled files should live here. If there's nothing to compile, you can drop your files directly into this folder and add them to the repo. If you need to build/compile, make a matching directory in the `../src/` folder and set it up to copy files here when building/compiling.
