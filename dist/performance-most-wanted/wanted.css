@@ -1,0 +1,157 @@
+/* --- Body/Shared Styles */
+html, body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  margin: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-family: "Rye", Georgia, 'Times New Roman', Times, serif;
+  color: rgb(82, 42, 10);
+}
+
+/* --- Loading Animation --- */
+@keyframes fade-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.wanted, .loading{
+  box-shadow: 0 0 0 black, 0 0 6em #8a4d0f inset;
+  background: #fffef0;
+}
+body.loading {
+  margin: 0;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero h1 {
+  display: none;
+}
+.loading .hero h1 {
+  display: flex;
+  font-size: 2rem;
+}
+.loading h1 b {
+  display: inline-block;
+  opacity: 1;
+  margin-left: 0.125rem;
+}
+.loading h1 b:nth-child(1) {
+  margin-left: 0.4rem;
+  animation: fade-text 1.5s 0s infinite linear alternate;
+}
+.loading h1 b:nth-child(2) {
+  animation: fade-text 1.5s 0.2s infinite linear alternate;
+}
+.loading h1 b:nth-child(3) {
+  animation: fade-text 1.5s 0.4s infinite linear alternate;
+}
+
+/* ---- Wanted Poster Styles --- */
+.poster {
+  box-shadow: 0px 5px 21px 0px rgba(0,0,0,0.59);
+  margin: 1rem;
+  margin: 20px auto;
+  transform: rotate(1deg);
+}
+@media (min-width: 576px) { 
+  .poster, .wanted {
+    width: 380px;
+  }
+}
+.poster:nth-of-type(2) {
+  transform: rotate(-3.5deg);
+}
+.poster:nth-of-type(5) {
+  transform: rotate(-2deg);
+}
+.poster[data-action="open"] {
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  bottom: -2rem;
+  left: -2rem;
+  background: rgba(0,0,0, 0.7);
+  z-index: 1000;
+  display: flex;
+  flex-wrap: column;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.1);
+}
+
+.wanted {
+  border-radius: 2px;
+  padding: 20px;
+  text-align: center;
+}
+.wanted h1, .wanted h2, .wanted h3{
+  margin: 0;
+  text-transform: uppercase;
+}
+.wanted h1 {
+  font-family: "Ewert", cursive;
+  font-weight: normal;
+  font-size: 3.5rem;
+}
+.wanted h2 {
+  font-size: 2.75rem;
+  font-weight: bold;
+}
+.wanted h3 {
+  font-size: 1.35rem;
+}
+.wanted h3 em{
+  font-style: normal;
+}
+.wanted hr {
+  margin: 8px 30px;
+  border: 0;
+  border-bottom: 2px solid rgb(82, 42, 10);
+}
+
+.wanted figure {
+  width: 50%;
+  margin: 0 auto;
+  max-height: 20%;
+  filter: grayscale(100%);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  display: none;
+}
+
+.wanted dl {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  color:rgb(114, 86, 63);
+  position: relative;
+}
+.wanted dt {
+  flex-basis: 65%;
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+}
+.wanted dd {
+  flex-basis: 25%;
+  margin: 0 0 0.5rem 10%;
+  color:rgb(101, 5, 5);
+  text-align: left;
+}
+.wanted dd:before {
+  content: "\2605";
+  position: absolute;
+  left: 66%;
+  color:rgb(74, 12, 1);
+}
+
+

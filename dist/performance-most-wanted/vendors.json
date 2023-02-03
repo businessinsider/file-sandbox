@@ -1,0 +1,69 @@
+{
+  "vendor": "Bounce Exchange",
+  "crimes": [
+    { "name": "Reduce unused JavaScript and defer loading scripts until they are required", "metric": "103.2 KiB" },
+    { "name": "Registers an unload listener"},
+    { "name": "Reduce JS execution time", "metric": "76 ms" },
+    { "name": "Avoid long main-thread tasks", "metric": "58ms" }
+  ]
+},
+{
+  "vendor": "TinyPass (Piano)",
+  "crimes": [
+    { "name": "Reduce unused JavaScript and defer loading scripts until they are required", "metric": "55.5 KiB" },
+    { "name": "Registers an unload listener" },
+    { "name": "Avoid enormous network payloads", "metric": "98.6 KiB" },
+    { "name": "Reduce JS execution time", "metric": "248 ms" },
+    { "name": "Serve static assets with an efficient cache policy", "metric": "4h" }
+  ]
+},
+{
+  "vendor": "Magnite Demand Manager",
+  "crimes": [
+    { "name": "Avoid bottleneck requests", "metric": "1,014 ms" },
+    { "name": "Avoid long main-thread tasks", "metric": "460 ms" },
+    { "name": "Reduce unused JavaScript and defer loading scripts until they are required", "metric": "34.0 KiB" },
+    { "name": "Avoid enormous network payloads", "metric": "128.7 KiB" },
+    { "name": "Reduce JS execution time", "metric": "111 ms" }
+  ]
+},
+{
+  "vendor": "Google Tag Manager",
+  "crimes": [
+    { "name": "Reduce unused JavaScript and defer loading scripts until they are required" },
+    { "name": "Avoid enormous network payloads", "metric": "98.1 KiB" },
+    { "name": "Reduce JS execution time", "metric": "189 ms" },
+    { "name": "Avoid long main-thread tasks", "metric": "96ms" }
+  ]
+},
+{
+  "vendor": "Confiant",
+  "crimes": [
+    { "name": "Reduce unused JavaScript and defer loading scripts until they are required" },
+    { "name": "Avoid bottleneck requests" },
+    { "name": "Avoid enormous network payloads", "metric": "80.1 KiB" },
+    { "name": "Serve static assets with an efficient cache policy", "metric": "10 d" }
+  ]
+},
+{
+  "vendor": "Amazon TAM",
+  "crimes": [
+    { "name": "Avoid bottleneck requests" },
+    { "name": "Serve static assets with an efficient cache policy", "metric": "1h" }
+  ]
+},
+{
+  "vendor": "Facebook Connect",
+  "crimes": [
+    { "name": "Avoid enormous network payloads", "metric": "107.8 KiB" },
+    { "name": "Serve static assets with an efficient cache policy", "metric": "20 m" }
+  ]
+},
+{
+  "vendor": "Preroll IMA SDK",
+  "crimes": [
+    { "name": "Avoid enormous network payloads", "metric": "124.2 KiB" },
+    { "name": "Reduce JS execution time", "metric": "53 ms" },
+    { "name": "Avoid long main-thread tasks", "metric": "62ms" }
+  ]
+}

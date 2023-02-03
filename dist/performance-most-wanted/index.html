@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Performance Most Wanted</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wood.css">
+  <link rel="stylesheet" href="wanted.css">
+</head>
+<body class="loading">
+  <section class="hero">
+    <h1>
+      Getting Most Wanted List 
+      <b>.</b>
+      <b>.</b>
+      <b>.</b>
+    </h1>
+  </section>
+  <template id="wanted-poster">
+    <article class="poster">
+      <div class="wanted">
+        <h1>Wanted</h1>
+        <h2></h2>
+        <hr />
+        <h3>For <em></em> crimes against performance:</h3>
+        <dl></dl>
+      </div>
+    </article>
+  </template>
+
+<script type="module">
+import {init} from './wanted.js';
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded');
+  setTimeout(init, 500);
+});
+</script>
+</body>
+</html>
