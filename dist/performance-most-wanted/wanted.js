@@ -73,6 +73,7 @@ const init = () => {
   fetchJson("wanted.json").then((offenders) => {
     makePosters(offenders);
     document.body.classList.remove('loading');
+    document.querySelector('.hero h1').innerText = document.title;
   }).catch(console.error);
 };
 

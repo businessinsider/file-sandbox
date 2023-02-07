@@ -43,7 +43,7 @@
   {
     "vendor": "Google Tag Manager",
     "crimes": [
-      { "name": "Reduce unused JavaScript and defer loading scripts until they are required" },
+      { "name": "Reduce unused JavaScript and defer loading scripts until they are required", "metric": "56.9 KiB" },
       { "name": "Avoid enormous network payloads", "metric": "98.1 KiB" },
       { "name": "Reduce JS execution time", "metric": "189 ms" },
       { "name": "Avoid long main-thread tasks", "metric": "96ms" }
@@ -52,8 +52,8 @@
   {
     "vendor": "Confiant",
     "crimes": [
-      { "name": "Reduce unused JavaScript and defer loading scripts until they are required" },
-      { "name": "Avoid bottleneck requests" },
+      { "name": "Reduce unused JavaScript and defer loading scripts until they are required", "metric": "41.8 KiB" },
+      { "name": "Avoid bottleneck requests", "metric": "4,979 ms" },
       { "name": "Avoid enormous network payloads", "metric": "80.1 KiB" },
       { "name": "Serve static assets with an efficient cache policy", "metric": "10 d" }
     ]
@@ -61,7 +61,7 @@
   {
     "vendor": "Amazon TAM",
     "crimes": [
-      { "name": "Avoid bottleneck requests" },
+      { "name": "Avoid bottleneck requests", "metric": "6,409 ms" },
       { "name": "Serve static assets with an efficient cache policy", "metric": "1h" }
     ]
   },
