@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Insider Ads Debug Bookmarklet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Insider Ads Debug Bookmarklet</h1>
+    <p class="notification">Drag this to your bookmarks toolbar, then click it after ads have loaded!<br />
+      <a class="button is-link" href="javascript:(function()%7Bvar lookup%3Ddocument.createElement(%27script%27),cb%3DMath.floor(Math.random()*10000000000)%3Blookup.src%3D%27https://experience-file-sandbox.s3.amazonaws.com/ad-debug-bookmarklet/adDebugBookmarklet.js%3F%27%2Bcb%3Bvar node%3Ddocument.getElementsByTagName(%27script%27)%5B0%5D%3Bnode.parentNode.insertBefore(lookup,node)%3B%7D)()%3B">Insider Ads Debug</a>
+    </p>
+    <p class="notification">
+      For local development, drag this to your bookmarks toolbar:<br />
+      <a class="button is-light" href="javascript:(function()%7Bvar lookup%3Ddocument.createElement(%27script%27),cb%3DMath.floor(Math.random()*10000000000)%3Blookup.src%3D%27//localhost:9999/ad-debug-bookmarklet/adDebugBookmarklet.js%3F%27%2Bcb%3Bvar node%3Ddocument.getElementsByTagName(%27script%27)%5B0%5D%3Bnode.parentNode.insertBefore(lookup,node)%3B%7D)()%3B">Local Insider Ads Debug</a>
+    </p>
+</body>
+</html>
