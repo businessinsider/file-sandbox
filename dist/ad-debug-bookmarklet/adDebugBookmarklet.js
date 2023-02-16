@@ -31,13 +31,11 @@
       'creativeId': 'creatives/creative/detail/creative_id=',
       'lineItemId': 'delivery/line_item/detail/line_item_id='
     }
-    for (key in gamLinkMap) {
+    for (key of Object.keys(gamLinkMap)) {
       if (responseInfo[key]) {
         const sourceAgnosticKey = `sourceAgnostic${uppercaseFirstLetter(key)}`;
-        let value = responseInfo[key];
-        if (responseInfo[sourceAgnosticKey]) {
-          value = responseInfo[sourceAgnosticKey];
-        }
+        const sourceAgnosticValue = responseInfo[sourceAgnosticKey];
+        let value = sourceAgnosticValue || responseInfo[key];
         transformedResponse[key] = `<a href="https://admanager.google.com/${gamNetworkId}#${gamLinkMap[key]}${value}" target="_blank">${value}</a>`;        
       }
     }
@@ -50,7 +48,7 @@
     for (key of Object.keys(data).sort()) {
       listMarkup.push(`
         <dt>${key}</dt>
-        <dd data-type="${typeof data[key]}">${Array.isArray(data[key]) ? data[key].join(', ') : data[key]}</dd>`);
+        <dd>${Array.isArray(data[key]) ? data[key].join(', ') : data[key]}</dd>`);
     }
     return listMarkup.join('');
   };
@@ -64,6 +62,11 @@
       slotMarkup.push(
         `<details open>`,
           `<summary>Slot id: #${gptSlot.getSlotElementId()}</summary>`,
+          slotResponseInfo ?
+            `<h4>Ad Response</h4>
+              <dl class="responseInfo">
+                ${populateList(transformResponse(slotResponseInfo))}
+              </dl>` : '',
           `<dl class="slotTargeting">
             <dt class="highlight">Ad Unit</dt>
             <dd class="highlight">${gptSlot.getAdUnitPath()}</dd>`,
@@ -72,11 +75,6 @@
             <dd>${slotSizes.map(e => "function" == typeof e.getWidth ? e.getWidth() + "x" + e.getHeight() : e)}</dd>` : '',
             populateList(slotTargeting), 
           `</dl>`,
-          slotResponseInfo ?
-            `<h4>Ad Response</h4>
-              <dl class="responseInfo">
-                ${populateList(transformResponse(slotResponseInfo))}
-              </dl>` : '',
           `</details>`
       )
     }
