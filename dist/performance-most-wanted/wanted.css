@@ -166,7 +166,22 @@ body.loading {
   content: "\2605";
   position: absolute;
   left: 66%;
-  color: var(--star-color);
 }
+.wanted footer a{
+  font-size: 0.9rem;
+  color: var(--crime-color);
+}
+.wanted footer:after{
+  content: "\261E";
+  font-size: 1.5em;
+  position: relative;
+  top: 0.25rem;
+}
+
+.wanted dd:before, .wanted footer:after, .wanted footer a:hover{
+  color: var(--star-color);
+  text-decoration: none;
+}
+
 
 

@@ -1,3 +1,7 @@
+// TODO: change this URL to a sample Lighthouse run from Speedcurbe
+// I used post (mobile) for this
+const RESULTS_URL = 'https://wpt.speedcurve.com/lighthouse.php?test=230130_MB_b97b04e9da97c681e5f8ae5d91c38ea4&run=3';
+
 const crimeTransforms = [
   { 
     "find": "Avoid bottleneck requests",
@@ -65,6 +69,7 @@ const makePosters = (offenders=[]) => {
     newPoster.querySelector('h2').textContent = offender.vendor;
     newPoster.querySelector('dl').innerHTML = chargeWithCrimes(offender.crimes);
     newPoster.querySelector('h3 em').textContent = offender.crimes.length;
+    newPoster.querySelector('footer a').href = RESULTS_URL;
     posterTemplate.parentNode.appendChild(newPoster);
   });
 };
