@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Third Party Performance Most Wanted</title>
+  <title>3rd Party Performance Most Wanted</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,10 @@
       <b>.</b>
       <b>.</b>
       <b>.</b>
-    </h1>
+    </h1>    
+    <footer>
+      <a href="" target="blank">More Details</a>
+    </footer>
   </section>
   <template id="wanted-poster">
     <article class="poster">
@@ -27,9 +30,6 @@
         <hr />
         <h3>For <em></em> crimes against performance:</h3>
         <dl></dl>
-        <footer>
-          <a href="" target="blank">More Details</a>
-        </footer>
       </div>
     </article>
   </template>
@@ -37,6 +37,8 @@
 <script type="module">
 import {init} from './wanted.js';
 document.addEventListener('DOMContentLoaded', () => {
+  // this setTimeout is only here so I could look at 
+  // my loading animation
   setTimeout(init, 500);
 });
 </script>

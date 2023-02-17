@@ -1,6 +1,11 @@
-// TODO: change this URL to a sample Lighthouse run from Speedcurbe
-// I used post (mobile) for this
-const RESULTS_URL = 'https://wpt.speedcurve.com/lighthouse.php?test=230130_MB_b97b04e9da97c681e5f8ae5d91c38ea4&run=3';
+
+// TODO: Every time we do a performance audit, 
+// we need to change the title to match the current report
+// and link to the Google Doc with Recommendations and overviews
+const results = {
+  title: 'Q1 2023',
+  url: 'https://docs.google.com/document/d/1ob2v1ZX2adU68Kmdc-tWuqWSBLDg0SAZemeYaxrHAB8/edit#'
+};
 
 const crimeTransforms = [
   { 
@@ -33,6 +38,12 @@ const crimeTransforms = [
   }
 ];
 
+/**
+ * Transforms crimes into shorter versions
+ * so they fit on the wanted poster
+ * @param {String} crimeText the text to transform
+ * @returns {String} the transformed text
+ */
 const transformCrime = (crimeText) => {  
   crimeTransforms.forEach(transform => {
     crimeText = crimeText.replace(transform.find, transform.replace);
@@ -40,6 +51,11 @@ const transformCrime = (crimeText) => {
   return crimeText;
 }
 
+/**
+ * Utility func to fetch a JSON file
+ * @param {String} file path to the JSON file
+ * @returns {Promise} the file resolution
+ */
 const fetchJson = async (file) => {
   console.log(`fetchJson: fetching ${file}...`);
   const response = await fetch(file);
@@ -50,8 +66,19 @@ const fetchJson = async (file) => {
   return Promise.reject("error retrieving JSON data");
 };
 
+/**
+ * Takes JSON, makes wanted posters
+ * then appends them to the DOM
+ * @param {Array} offenders contents of wanted.json
+ * @returns nothing
+ */
 const makePosters = (offenders=[]) => {
 
+  /**
+   * Creates the crime dt/dd markup
+   * @param {Array} crimes text to transform
+   * @returns {String} the transformed text
+   */
   const chargeWithCrimes = (crimes=[]) => {
     const guiltyAsCharged = [];
     crimes.forEach((crime) => {
@@ -69,17 +96,23 @@ const makePosters = (offenders=[]) => {
     newPoster.querySelector('h2').textContent = offender.vendor;
     newPoster.querySelector('dl').innerHTML = chargeWithCrimes(offender.crimes);
     newPoster.querySelector('h3 em').textContent = offender.crimes.length;
-    newPoster.querySelector('footer a').href = RESULTS_URL;
     posterTemplate.parentNode.appendChild(newPoster);
   });
+  return;
 };
 
+/**
+ * initialize
+ * @returns nothing
+ */
 const init = () => {
   fetchJson("wanted.json").then((offenders) => {
     makePosters(offenders);
     document.body.classList.remove('loading');
-    document.querySelector('.hero h1').innerText = document.title;
+    document.querySelector('.hero h1').innerText = `${results.title} ${document.title}`;
+    document.querySelector('.hero footer a').href = results.url;
   }).catch(console.error);
+  return;
 };
 
 export { init }

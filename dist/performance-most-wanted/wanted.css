@@ -43,14 +43,15 @@ body.loading {
 .hero{
   width: 100%;
   text-align: center;
+  color: var(--cream);
 }
 .hero h1 {
-  color: var(--cream);
   font-size: 2.5rem;
   font-weight: normal;
   text-shadow: 0 3px 10px var(--dark-brown);
+  margin-bottom: 0.5rem;
 }
-.loading .hero h1 {
+.loading .hero{
   color: var(--dark-brown);
   text-shadow: none;
 }
@@ -70,6 +71,25 @@ body.loading {
   animation: fade-text 1.5s 0.4s infinite linear alternate;
 }
 
+/* Hero Styles */
+.hero footer a{
+  font-weight: normal;
+  text-decoration: none;
+  color: var(--cream);
+  border-bottom: 1px dotted var(--cream);
+}
+.hero footer a:after{
+  content: "\261E";
+  font-size: 1.5em;
+  position: relative;
+  top: 0.25rem;
+  left: 0.25rem;
+}
+.hero footer a:hover{
+  color: white;
+  text-shadow: 0 3px 10px var(--dark-brown);
+  border-color: 1px dotted var(--med-brown);
+}
 /* ---- Wanted Poster Styles --- */
 .poster {
   box-shadow: 0px 5px 21px 0px var(--poster-shadow);
@@ -166,21 +186,7 @@ body.loading {
   content: "\2605";
   position: absolute;
   left: 66%;
-}
-.wanted footer a{
-  font-size: 0.9rem;
-  color: var(--crime-color);
-}
-.wanted footer:after{
-  content: "\261E";
-  font-size: 1.5em;
-  position: relative;
-  top: 0.25rem;
-}
-
-.wanted dd:before, .wanted footer:after, .wanted footer a:hover{
   color: var(--star-color);
-  text-decoration: none;
 }
 
 
