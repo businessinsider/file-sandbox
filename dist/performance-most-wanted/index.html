@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="wood.css">
   <link rel="stylesheet" href="wanted.css">
+  <link rel="stylesheet" href="wood.css">
 </head>
 <body class="loading">
   <section class="hero">
@@ -36,11 +36,7 @@
 
 <script type="module">
 import {init} from './wanted.js';
-document.addEventListener('DOMContentLoaded', () => {
-  // this setTimeout is only here so I could look at 
-  // my loading animation
-  setTimeout(init, 500);
-});
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
