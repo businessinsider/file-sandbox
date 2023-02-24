@@ -42,13 +42,14 @@
     return transformedResponse;
   };
 
-  const populateList = (data) => {    
+  const populateList = (data) => {
     if (!data) return '';
     const listMarkup = [];
     for (key of Object.keys(data).sort()) {
+      const highlightClass = key.indexOf('adunit') !== -1 ? ' class="highlight"' : '';
       listMarkup.push(`
-        <dt>${key}</dt>
-        <dd>${Array.isArray(data[key]) ? data[key].join(', ') : data[key]}</dd>`);
+        <dt${highlightClass}>${key}</dt>
+        <dd${highlightClass}>${Array.isArray(data[key]) ? data[key].join(', ') : data[key]}</dd>`);
     }
     return listMarkup.join('');
   };
@@ -86,7 +87,7 @@
     return `
       <dialog id="insiderAdsDialog" open>
         <h1>Insider Ads</h1>
-        <details id="insiderAdsPageTargeting" open>
+        <details id="insiderAdsPageTargeting">
           <summary>Page-Level Targeting</summary>
           <dl class="pageTargeting">
             ${populateList(getTargeting())}
@@ -109,6 +110,12 @@
         position: fixed;
         top: var(--sticky-top);
         font-size: 0.8rem;
+        width: 100%;
+      }
+      @media (min-width: 500px) { 
+        #insiderAdsDebug {
+          max-width: 500px;
+        }
       }
       #insiderAdsDialog button.close{
         position: absolute;
@@ -121,8 +128,6 @@
       }
       #insiderAdsDialog{
         margin: 0;
-        min-width: 500px;
-        max-width: 500px;
         max-height: 90vh;
         overflow: scroll;
       }
@@ -136,7 +141,7 @@
         border-bottom: 1px solid #ddd;
       }
       #insiderAdsDialog dt, #insiderAdsDialog dd{
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
         margin: 0;
         padding: 0 .125rem 0 .25rem;
         border: solid #ddd;
@@ -147,10 +152,10 @@
         content: ': ';
       }
       #insiderAdsDialog dt.highlight {
-        background: #dedede;
+        background: lavender;
       }
       #insiderAdsDialog dd.highlight {
-        background: #efefef;
+        background: lavender;
       }
       #insiderAdsDialog h1, #insiderAdsDialog h2, #insiderAdsDialog h3, #insiderAdsDialog h4, #insiderAdsDialog summary {
         font-weight: bold; 

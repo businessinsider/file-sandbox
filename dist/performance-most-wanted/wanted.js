@@ -1,10 +1,7 @@
-
 // TODO: Every time we do a performance audit, 
-// we need to change the title to match the current report
-// and link to the Google Doc with Recommendations and overviews
+// we need to add it to the list here
 const results = {
-  title: 'Q1 2023',
-  url: 'https://docs.google.com/document/d/1ob2v1ZX2adU68Kmdc-tWuqWSBLDg0SAZemeYaxrHAB8/edit#'
+  '2023-q1': 'wanted-2023-q1.json' // the first item in the list will be pulled for the index
 };
 
 const crimeTransforms = [
@@ -72,7 +69,7 @@ const fetchJson = async (file) => {
  * @param {Array} offenders contents of wanted.json
  * @returns nothing
  */
-const makePosters = (offenders=[]) => {
+const makePosters = (data={}) => {
 
   /**
    * Creates the crime dt/dd markup
@@ -87,15 +84,16 @@ const makePosters = (offenders=[]) => {
     return guiltyAsCharged.join('');
   };
 
+  const offenders = data.results;
   offenders.forEach((offender) => {
+    // clone the poster template
     const posterTemplate = document.querySelector('#wanted-poster'),
       newPoster = posterTemplate.content.cloneNode(true);
-    if (offender.vendor === 'Permutive') {
-      newPoster.querySelector('.poster').classList.add('hover');
-    }
+    // modify the title, list & count of crimes
     newPoster.querySelector('h2').textContent = offender.vendor;
     newPoster.querySelector('dl').innerHTML = chargeWithCrimes(offender.crimes);
     newPoster.querySelector('h3 em').textContent = offender.crimes.length;
+    // append the poster to the DOM
     posterTemplate.parentNode.appendChild(newPoster);
   });
   return;
@@ -106,11 +104,15 @@ const makePosters = (offenders=[]) => {
  * @returns nothing
  */
 const init = () => {
-  fetchJson("wanted.json").then((offenders) => {
-    makePosters(offenders);
+  // grab the the first entry in the results map (above)
+  const wantedJson = results[Object.keys(results)[0]];
+  fetchJson(wantedJson).then((data) => {
+    // make wanted posters
+    makePosters(data);
+    // modify the page title and link
     document.body.classList.remove('loading');
-    document.querySelector('.hero h1').innerText = `${results.title} ${document.title}`;
-    document.querySelector('.hero footer a').href = results.url;
+    document.querySelector('.hero h1').innerText = `${data.title} ${document.title}`;
+    document.querySelector('.hero footer a').href = data.url;
   }).catch(console.error);
   return;
 };
