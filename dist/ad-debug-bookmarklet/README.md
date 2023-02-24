@@ -14,6 +14,8 @@ node.parentNode.insertBefore(lookup,node);
 
 ### Bookmarklet-ified version of the above
 
+I used the [Bookmarkleter](https://chriszarate.github.io/bookmarkleter/) to get this code:
+
 ```
 javascript:void%20function(){const%20a=document.createElement(%22script%22),b=Math.floor(1e10*Math.random());a.src=`//experience-file-sandbox.s3.amazonaws.com/ad-debug-bookmarklet/adDebugBookmarklet.js%3F${b}`;const%20c=document.getElementsByTagName(%22script%22)[0];c.parentNode.insertBefore(a,c)}();
 ```
