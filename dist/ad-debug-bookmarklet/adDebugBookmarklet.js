@@ -108,9 +108,10 @@
       #insiderAdsDebug{
         z-index: 3000;
         position: fixed;
-        top: var(--sticky-top);
+        top: var(--masthead-or-ad-bottom);
         font-size: 0.8rem;
         width: 100%;
+        min-height: 75vh;
       }
       @media (min-width: 500px) { 
         #insiderAdsDebug {
@@ -151,10 +152,7 @@
       #insiderAdsDialog dt:after {
         content: ': ';
       }
-      #insiderAdsDialog dt.highlight {
-        background: lavender;
-      }
-      #insiderAdsDialog dd.highlight {
+      #insiderAdsDialog .highlight {
         background: lavender;
       }
       #insiderAdsDialog h1, #insiderAdsDialog h2, #insiderAdsDialog h3, #insiderAdsDialog h4, #insiderAdsDialog summary {
@@ -171,7 +169,7 @@
       #insiderAdsDialog h4{ 
         font-size: 1rem; 
       }
-    `;
+    `.replace(/[\s]{2,}/g, "");
     const styleSheetId = 'insiderAdsDebugStyles';
     const existingStylesheet = document.getElementById(styleSheetId);
 
